@@ -143,6 +143,21 @@ h1{font-size:clamp(2.4rem,5.6vw,4rem)}
 .plain strong{display:block;font-family:var(--display);font-size:1.15rem;letter-spacing:-.01em}
 .plain span{color:var(--muted);font-size:1rem}
 
+/* Agenda */
+.events{list-style:none;margin:0;padding:0}
+.event{display:grid;grid-template-columns:5.5rem minmax(0,1fr);gap:0 1.5rem;padding:1.6rem 0;border-top:1px solid var(--line)}
+.event:last-child{border-bottom:1px solid var(--line)}
+.event-date{font-family:var(--display);font-weight:700;line-height:1}
+.event-day{display:block;font-size:3rem;letter-spacing:-.03em}
+.event-month{display:block;margin-top:.4rem;font:400 1rem/1.2 var(--text);color:var(--muted)}
+.event-state{display:inline-block;margin-bottom:.6rem;font-size:.85rem;font-weight:700;background:var(--mark);color:var(--ink);border-radius:999px;padding:.1rem .7rem}
+.event-state[hidden]{display:none}
+.event-state.past{background:transparent;border:1px solid var(--line);color:var(--muted);font-weight:400}
+.event h3{font-size:1.4rem;margin-bottom:.5rem}
+.event p{color:var(--muted)}
+.event-meta{margin-top:.4rem;font-size:1rem}
+.event .link{display:inline-block;margin-top:.8rem}
+
 /* Privacidad y límites */
 .dark{background:var(--ink);color:var(--paper)}
 .dark h2{color:#fff}
@@ -181,6 +196,8 @@ h1{font-size:clamp(2.4rem,5.6vw,4rem)}
   .sticky{position:sticky;top:2rem}
 }
 @media (max-width:520px){
+  .event{grid-template-columns:4rem minmax(0,1fr);gap:0 1rem}
+  .event-day{font-size:2.3rem}
   .sum-row{grid-template-columns:minmax(0,1fr);gap:.15rem}
 }
 @media (prefers-reduced-motion:reduce){
@@ -199,6 +216,7 @@ h1{font-size:clamp(2.4rem,5.6vw,4rem)}
   <nav class="nav" aria-label="Principal">
     <a href="#como-funciona">Cómo funciona</a>
     <a href="#quienes-somos">Quiénes somos</a>
+    <a href="#agenda">Agenda</a>
     <a href="#privacidad">Privacidad</a>
     <a href="#participa">Participa</a>
   </nav>
@@ -337,6 +355,30 @@ h1{font-size:clamp(2.4rem,5.6vw,4rem)}
     </div>
   </section>
 
+  <!-- Agenda -->
+  <section class="block tint" id="agenda">
+    <div class="wrap split">
+      <div class="copy">
+        <h2>Agenda</h2>
+        <p>Encuentros, jornadas y actos en los que participamos. Iremos añadiendo aquí las novedades.</p>
+      </div>
+      <ul class="events">
+        <!-- Para añadir un acto, copia un bloque <li class="event"> entero y cambia la fecha (data-date y datetime, formato AAAA-MM-DD),
+             el título, el texto y el enlace. Pon primero los próximos. La etiqueta "Próximo" o "Celebrado" se calcula sola. -->
+        <li class="event" data-date="2026-09-23">
+          <time class="event-date" datetime="2026-09-23"><span class="event-day">23</span><span class="event-month">sep 2026</span></time>
+          <div>
+            <span class="event-state" hidden></span>
+            <h3>ConVivir 2026: Simposio de Vida y Tumores Digestivos</h3>
+            <p>Miguel Martínez, responsable de ACOMPAS, participa en la Mesa 1, «¿Qué hacer desde el diagnóstico?».</p>
+            <p class="event-meta">Palau Macaya, Barcelona</p>
+            <a class="link" href="https://convivirtd.org/agenda/" rel="noopener">Ver el programa completo</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
   <!-- Privacidad y límites -->
   <section class="block dark" id="privacidad">
     <div class="wrap split">
@@ -446,6 +488,16 @@ h1{font-size:clamp(2.4rem,5.6vw,4rem)}
 
   terms.forEach(function (t) {
     t.addEventListener("click", function () { show(t.getAttribute("data-k")); });
+  });
+
+  /* Etiqueta Próximo / Celebrado en la agenda */
+  document.querySelectorAll(".event[data-date]").forEach(function (e) {
+    var s = e.querySelector(".event-state");
+    if (!s) return;
+    var past = new Date(e.getAttribute("data-date") + "T23:59:59") < new Date();
+    s.textContent = past ? "Celebrado" : "Próximo";
+    if (past) s.classList.add("past");
+    s.hidden = false;
   });
 })();
 </script>
