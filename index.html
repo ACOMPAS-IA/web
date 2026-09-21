@@ -143,6 +143,15 @@ h1{font-size:clamp(2.4rem,5.6vw,4rem)}
 .plain strong{display:block;font-family:var(--display);font-size:1.15rem;letter-spacing:-.01em}
 .plain span{color:var(--muted);font-size:1rem}
 
+/* Equipo */
+.team{margin-top:clamp(2.5rem,5vw,4rem);padding-top:2rem;border-top:1px solid var(--line)}
+.team h3{font-size:1.5rem}
+.team > p{margin-top:.5rem;color:var(--muted);max-width:36rem}
+.team-list{list-style:none;margin:1.5rem 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1.25rem 2rem}
+.team-list li{padding-top:.9rem;border-top:2px solid var(--ink)}
+.team-list .name{display:block;font:700 1.4rem/1.2 var(--display);letter-spacing:-.01em}
+.team-list a{display:inline-block;margin-top:.35rem;font-size:1rem}
+
 /* Agenda */
 .events{list-style:none;margin:0;padding:0}
 .event{display:grid;grid-template-columns:5.5rem minmax(0,1fr);gap:0 1.5rem;padding:1.6rem 0;border-top:1px solid var(--line)}
@@ -352,6 +361,19 @@ h1{font-size:clamp(2.4rem,5.6vw,4rem)}
           <li><strong>Código abierto</strong><span>El código del proyecto es público.</span></li>
         </ul>
       </div>
+    </div>
+    <div class="wrap team" id="equipo">
+      <h3>El equipo</h3>
+      <p>ACOMPAS lo desarrolla un equipo de personas voluntarias que colaboran de forma transversal en todas sus áreas.</p>
+      <ul class="team-list">
+        <!-- Para añadir o quitar a alguien, copia o borra un bloque <li>. Enlace al perfil: opcional. Cuenta con el consentimiento de cada persona. -->
+        <li>
+          <span class="name">Miguel Martínez</span>
+          <a class="link" href="https://www.linkedin.com/in/miguel-mart%C3%ADnez-3b98424a" target="_blank" rel="noopener">Perfil en LinkedIn<span class="sr"> (se abre en una pestaña nueva)</span></a>
+        </li>
+        <li><span class="name">Javier Pérez Ávilas</span></li>
+        <li><span class="name">Luis del Olmo</span></li>
+      </ul>
     </div>
   </section>
 
